@@ -1,0 +1,1242 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>CMRI Loan Calculator</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="ico"><img src="asset/img/cal-ico.png" class="cal-ico"> </div>
+    <h1><strong>PN</strong> CALCULATOR</h1>
+    <div class="i-ivu-bx-container">
+        <div class="i-ivu-box">
+            <div class="i-ivu-input-group">
+                <label for="date">Creation Date: </label>       
+            </div>
+        
+            <div class="i-ivu-input-group">
+                <label for="name">Loan Amount: </label>
+            </div>
+        
+            <div class="i-ivu-input-group">
+                <label for="name">Net Income: </label>
+            </div>
+
+            <div class="i-ivu-input-group">
+                <label for="name">Loan Term: </label>
+            </div>
+
+            <div class="i-ivu-input-group">
+                <label for="name">Pagkakautang: </label>
+            </div>
+        </div>
+        <div class="i-ivu-box">
+            <div class="input-group">
+                <input type="date" id="input-date" name="date" class="line-date" placeholder="MM-DD-YYYY">   
+            </div>
+            <div class="input-group">
+                <input type="text" id="l-amnt" name="l-amnt" class="numberInput">
+            </div>
+            <div class="input-group">
+                <input type="text" id="n-net" name="n-net" class="numberInput n-net">
+            </div>
+            <div class="dropdown-group">
+                <select id="l-t" name="l-t" class="l-t">
+                    <option value=""></option>
+                    <option value="" class="desc">Personal/Housing/Sikap</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="16">16</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="36">36</option>
+                    <option value="50">50</option>
+                    <option value="" class="desc">Education</option>
+                    <option value="012">12</option>
+                    <option value="025">25</option>
+                    <option value="036">36</option>
+                    <option value="050">50</option>
+                    <option value="">SSS</option>
+                    <option value="0025">25</option>
+                    <option value="" class="desc">Sagip/Kabuklod</option>
+                    <option value="0050">50</option>
+                </select>
+                <span>weeks</span>
+            </div>
+            <div class="input-group">
+                <input type="text" id="debt" name="debt" class="numberInput">
+            </div>
+            <div class="dropdown-group l-int">
+                <label for="options">Loan Interest * </label>
+                <select id="l-int" name="l-int" required>
+                    <option value=""></option>
+                    <option value="">Personal/Housing/Sikap</option>
+                    <option value=".226">2.26 (4w)</option>
+                    <option value=".512">5.12 (8w)</option>
+                    <option value=".768">7.68 (12w)</option>
+                    <option value=".1024">10.24 (16w)</option>
+                    <option value=".128">12.8 (20w)</option>
+                    <option value=".16">16 (25w)</option>
+                    <option value=".2128">21.28 (36w)</option>
+                    <option value=".28">28 (50w)</option>
+                    <option value="">Education</option>
+                    <option value=".28">4.32 (12w)</option>
+                    <option value=".9">9 (25w)</option>
+                    <option value=".1296">12.96 (36w)</option>
+                    <option value=".18">18 (50w)</option>
+                    <option value="">SSS</option>
+                    <option value=".12">12</option>
+                    <option value="">SAgip/Kabuklod</option>
+                    <option value=".24">24</option>
+                </select>
+                <span>%</span>
+            </div>
+        </div>
+    </div>
+  
+    <div class="err-mess" id="err-mess">
+        <div id="err"></div>
+    </div>
+    <button id="calculate" class="calculate-btn">
+       Calculate
+    </button>
+
+    <hr>
+
+    <div class="i-ivu-bx-container">
+        <div class="i-ivu-box1">
+            <div class="i-ivu-input-group">
+                <label for="date">Amount: </label>       
+            </div>
+        </div>
+
+        <div class="i-ivu-box1">
+            <div class="input-group">
+                <div class="amnt"><span class="peso">₱</span> <span id="loan-dup"></span></div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="i-ivu-bx-container">
+        <div class="i-ivu-box2">
+            <div class="i-ivu-input-group1">
+                <label for="date">Month</label>   
+                <div class="i-ivu-res" id="loan-term1"></div>      
+            </div>
+        </div>
+
+        <div class="i-ivu-box2">
+            <div class="i-ivu-input-group1">
+                <label for="date">CR</label>   
+                <div class="i-ivu-res"><span class="i-ivu-res" id="cr"></span>%</div>    
+            </div>
+        </div>
+
+        <div class="i-ivu-box2">
+            <div class="i-ivu-input-group1">
+                <label for="date">ER</label>
+                <div class="i-ivu-res"><span class="i-ivu-res" id="er"></span>%</div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="i-ivu-bx-container">
+        <div class="i-ivu-box2">
+            <div class="i-ivu-input-group1">
+                <label for="date">Interest</label>   
+                <div class="i-ivu-res" id="loan-int"></div>      
+            </div>
+        </div>
+
+        <div class="i-ivu-box2">
+            <div class="i-ivu-input-group1">
+                <label for="date">LRF</label>   
+                <div class="i-ivu-res" id="loan-lrf"></div>    
+            </div>
+        </div>
+
+        <div class="i-ivu-box2">
+            <div class="i-ivu-input-group1">
+                <label for="date">Term</label>
+                <div class="i-ivu-res" id="loan-term"></div>    
+            </div>
+        </div>
+
+        <div class="i-ivu-box2" style="display: none;">
+            <div class="i-ivu-input-group1">
+                <label for="date">proceed</label>
+                <div class="i-ivu-res" id="loan-dup1"></div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="i-ivu-bx-container i-default">
+        <div class="i-ivu-box1">
+            <div class="i-ivu-input-group">
+                <label for="date" class="i-ivu-strng">Amortization:</label>       
+            </div>
+        </div>
+
+        <div class="i-ivu-box1">
+            <div class="input-group">
+                <div class="amnt"><span class="peso i-ivu-strng">₱</span> <span id="weekly-pay" class="i-ivu-strng"></span></div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="paymnt">
+
+        <div class="i-ivu-bx-container crt-dt">
+            <div class="i-ivu-box1">
+                <div class="i-ivu-input-group">
+                    <label for="date">Creation Date: </label>       
+                </div>
+            </div>
+    
+            <div class="i-ivu-box1">
+                <div class="input-group">
+                    <div class="amnt"><span id="create-date"></span></div>    
+                </div>
+            </div>
+        </div>
+
+        <div class="i-ivu-bx-container">
+            <div class="i-ivu-box1">
+                <div class="i-ivu-input-group">
+                    <label for="date">First Payment: </label>       
+                </div>
+            </div>
+    
+            <div class="i-ivu-box1">
+                <div class="input-group">
+                    <div class="amnt"><span id="result"></span></div>    
+                </div>
+            </div>
+        </div>
+
+        <div class="i-ivu-bx-container">
+            <div class="i-ivu-box1">
+                <div class="i-ivu-input-group">
+                    <label for="date">Maturity Date: </label>       
+                </div>
+            </div>
+    
+            <div class="i-ivu-box1">
+                <div class="input-group">
+                    <div class="amnt"><span id="res"></span></div>    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="i-ivu-bx-container">
+        <div class="i-ivu-box2">
+            <div class="i-ivu-input-group1">
+                <label for="date">EVALUATION</label>   
+                <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="net-dup" class="peso1"></span></div>  
+                <div class="i-ivu-res">50%</div>  
+                <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="m-50" class="peso1"></span></div>  
+                <div class="i-ivu-res" id="m-loan-term"></div>  
+                <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="loan-total" class="peso1"></span></div>      
+            </div>
+        </div>
+
+        <div class="i-ivu-box2">
+            <div class="i-ivu-input-group1">
+                <label for="date">ASSESSMENT</label>   
+                <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="loanable" class="peso1"></span></div>  
+                <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="exist-loan" class="peso1"></span></div>  
+                <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="a-b=c" class="peso1"></span></div>  
+                <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="l-amnt-total" class="peso1"></span></div>  
+                <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="l-amnt-total1" class="peso1"></span></div>  
+            </div>
+        </div>
+    </div>
+
+    <div id="dynamicLabel" class="dynamicLabel"></div>
+
+    <div id="dynamicLabel1" class="dynamicLabel"></div>
+</div>
+<footer class="footer">
+    <div class="footer-container">
+        <!-- <div class="footer-section">
+            <h3>About</h3>
+            <p>We are dedicated to providing the best software services to our customers.</p>
+        </div> -->
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p>Email: markjay.lajada@gmail.com</p>
+            <p>Phone: +639 275 188 177</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 LADZ. All Rights Reserved.</p>
+    </div>
+</footer>
+    <script>
+        // List of allowed IP addresses  
+        const allowedIPs = ["180.195.205.60", "111.90.221.16"];
+
+        // Function to fetch IP and check if it’s allowed
+        async function checkAccess() {
+            
+            try {
+                // Fetch the user's IP from a public IP API
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                const userIP = data.ip;
+
+                // Check if the user IP is in the allowed list
+                if (!allowedIPs.includes(userIP)) {
+
+                    window.location.href = "http://localhost/mj/err.html";
+
+                }
+            } catch (error) {
+                console.error("Failed to retrieve IP address", error);
+                document.body.innerHTML = "<h1>Error</h1><p>Could not verify your access. Please try again later.</p>";
+            }
+        }
+
+        // Only check access on the main page
+            document.addEventListener("DOMContentLoaded", () => {
+                if (window.location.pathname === "http://localhost/mj/") { // Adjust this to your main page path
+                    checkAccess();
+                }
+            });
+      
+    </script>
+  <script>
+  //disabled all the previous date exept today and future dates
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById("input-date").setAttribute("min", today);
+
+  document.addEventListener("DOMContentLoaded", function() {
+      const select = document.getElementById('l-t');
+      const updateButton = document.getElementById('calculate');
+
+      updateButton.addEventListener("click", updateLabel);
+
+      function updateLabel() {
+
+          const lrfDiv = document.getElementById('loan-lrf');
+          const monsDiv = parseFloat(document.getElementById('dynamicLabel1').value);
+          const loanTerm = document.getElementById('loan-term');
+          const loanTerm1 = document.getElementById('loan-term1');
+          const mLoanTerm = document.getElementById('m-loan-term');
+          const loanInt = parseFloat(document.getElementById("l-int").value, 10);
+          const cr = document.getElementById('cr');
+          const er = document.getElementById('er');
+          const lAmount = parseFloat(document.getElementById('l-amnt').value);
+          const wPay = document.getElementById('weekly-pay');
+          const lInt = document.getElementById('loan-int');
+          let totalLoan = 0;
+          let totalWeeklyDue = 0;
+          const value = select.value;
+
+          if (value === "4") {
+              lrfDiv.textContent = (lAmount * 0.0012).toFixed(2);
+              monsDiv.textContent = 1;
+              loanTerm.textContent = 4;
+              loanTerm1.textContent = 1;
+              mLoanTerm.textContent = 1;
+              cr.textContent = 4.25;
+              er.textContent = 4.49;
+
+              totalLoan = lAmount * 0.256;
+
+              totalWeeklyDue = ((lAmount * 0.256) + lAmount) / 4;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+              
+
+          } else if (value === "8") {
+              lrfDiv.textContent = (lAmount * 0.0024).toFixed(2);
+              monsDiv.textContent = 2;
+              loanTerm.textContent = 8;
+              loanTerm1.textContent = 2;
+              mLoanTerm.textContent = 2;
+              cr.textContent = 4.68;
+              er.textContent = 4.96;
+
+              totalLoan = lAmount * 0.512;
+
+              totalWeeklyDue = ((lAmount * 0.512) + lAmount) / 8;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "12") {
+              lrfDiv.textContent = (lAmount * 0.0036).toFixed(2);
+              monsDiv.textContent = 3;
+              loanTerm.textContent = 12;
+              loanTerm1.textContent = 3;
+              mLoanTerm.textContent = 3;
+              cr.textContent = 4.8;
+              er.textContent = 5.11;
+
+              totalLoan = lAmount * 0.768;
+
+              totalWeeklyDue = ((lAmount * 0.768) + lAmount) / 12;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "16") {
+              lrfDiv.textContent = (lAmount * 0.0248).toFixed(2);
+              monsDiv.textContent = 4;
+              loanTerm.textContent = 16;
+              loanTerm1.textContent = 4;
+              mLoanTerm.textContent = 4;
+              cr.textContent = 4.88;
+              er.textContent = 5.17;
+
+              totalLoan = lAmount * 0.1024;
+
+              totalWeeklyDue = ((lAmount * 0.1024) + lAmount) / 16;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "20") {
+              lrfDiv.textContent = (lAmount * 0.0060).toFixed(2);
+              monsDiv.textContent = 5;
+              loanTerm.textContent = 20;
+              loanTerm1.textContent = 5;
+              mLoanTerm.textContent = 5; 
+              cr.textContent = 4.7;
+              er.textContent = 5.19; 
+
+              totalLoan = lAmount * 0.1280;
+
+              totalWeeklyDue = ((lAmount * 0.1280) + lAmount) / 20;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "25") {
+              lrfDiv.textContent = (lAmount * 0.0075).toFixed(2);
+              monsDiv.textContent = 6;
+              loanTerm.textContent = 25;
+              loanTerm1.textContent = 6;
+              mLoanTerm.textContent = 6;
+              cr.textContent = 4.9;
+              er.textContent = 5.2;
+
+              totalLoan = lAmount * 0.16;
+
+              totalWeeklyDue = ((lAmount * 0.16) + lAmount) / 25;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "36") {
+              lrfDiv.textContent = (lAmount * 0.0108).toFixed(2);
+              monsDiv.textContent = 9;
+              loanTerm.textContent = 36;
+              loanTerm1.textContent = 9;
+              mLoanTerm.textContent = 9;
+              cr.textContent = 4.51;
+              er.textContent = 4.78;
+
+              totalLoan = lAmount * 0.2128;
+
+              totalWeeklyDue = ((lAmount * 0.2128) + lAmount) / 36;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "50") {
+              lrfDiv.textContent = (lAmount * 0.015).toFixed(2);
+              monsDiv.textContent = 12;
+              loanTerm.textContent = 50;
+              loanTerm1.textContent = 12;
+              mLoanTerm.textContent = 12;
+              cr.textContent = 4.23;
+              er.textContent = 4.47;
+
+              totalLoan = lAmount * 0.28;
+
+              totalWeeklyDue = ((lAmount * 0.28) + lAmount) / 50;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+             //Educ
+          } else if (value === "012") {
+              lrfDiv.textContent = (lAmount * 0.0036).toFixed(2);
+              monsDiv.textContent = 3;
+              loanTerm.textContent = 12;
+              loanTerm1.textContent = 3;
+              mLoanTerm.textContent = 3;
+              cr.textContent = 2.74;
+              er.textContent = 2.88;
+
+              totalLoan = lAmount * 0.432;
+
+              totalWeeklyDue = ((lAmount * 0.432) + lAmount) / 12;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "025") {
+              lrfDiv.textContent = (lAmount * 0.0075).toFixed(2);
+              monsDiv.textContent = 6;
+              loanTerm.textContent = 25;
+              loanTerm1.textContent = 6;
+              mLoanTerm.textContent = 6;
+              cr.textContent = 2.81;
+              er.textContent = 2.95;
+
+              totalLoan = lAmount * 0.9;
+
+              totalWeeklyDue = ((lAmount * 0.9) + lAmount) / 25;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "036") {
+              lrfDiv.textContent = (lAmount * 0.0103).toFixed(2);
+              monsDiv.textContent = 9;
+              loanTerm.textContent = 36;
+              loanTerm1.textContent = 9;
+              mLoanTerm.textContent = 9;
+              cr.textContent = 2.81;
+              er.textContent = 2.48;
+
+              totalLoan = lAmount * 0.1296;
+
+              totalWeeklyDue = ((lAmount * 0.1296) + lAmount) / 36;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else if (value === "050") {
+              lrfDiv.textContent = (lAmount * 0.015).toFixed(2);
+              monsDiv.textContent = 12;
+              loanTerm.textContent = 50;
+              loanTerm1.textContent = 12;
+              mLoanTerm.textContent = 12;
+              cr.textContent = 2.79;
+              er.textContent = 2.93;
+
+              totalLoan = lAmount * 0.18;
+
+              totalWeeklyDue = ((lAmount * 0.18) + lAmount) / 50;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+             //SSS
+          } else if (value === "0025") {
+              lrfDiv.textContent = (lAmount * 0.0075).toFixed(2);
+              monsDiv.textContent = 6;
+              loanTerm.textContent = 25;
+              loanTerm1.textContent = 6;
+              mLoanTerm.textContent = 6;
+              cr.textContent = 3.75;
+              er.textContent = 3.93;
+
+              totalLoan = lAmount * 0.12;
+
+              totalWeeklyDue = ((lAmount * 0.12) + lAmount) / 25;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+             //Sagip, kabuklod, OL-Health
+          } else if (value === "0050") {
+              lrfDiv.textContent = (lAmount * 0.015).toFixed(2);
+              monsDiv.textContent = 12;
+              loanTerm.textContent = 50;
+              loanTerm1.textContent = 12;
+              mLoanTerm.textContent = 12;
+              cr.textContent = 3.67;
+              er.textContent = 3.87;
+
+              totalLoan = lAmount * 0.24;
+
+              totalWeeklyDue = ((lAmount * 0.24) + lAmount) / 50;
+
+              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+             wPay.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalWeeklyDue);
+             lInt.textContent = new Intl.NumberFormat('en-US', {
+                 minimumFractionDigits: 2,
+                 maximumFractionDigits: 2
+             }).format(totalLoan);
+
+          } else {
+              lrfDiv.textContent = N / A;
+          }
+      }
+  });
+  </script>
+  <script>
+    document.querySelectorAll(".numberInput").forEach((input) => {
+        input.addEventListener("input", function () {
+            // Remove any non-numeric characters
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    });
+  </script>
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .cal-ico {
+    width: 60px;
+    position: relative;
+  }
+  .ico {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Responsive adjustments with media queries */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 10px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .container {
+      padding: 0 9px;
+    }
+  }
+
+  .date-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 11px;
+    
+  }
+
+  .dropdown-group {
+    display: flex;
+    align-items: center;
+    /* Vertically centers label and dropdown */
+    gap: 10px;
+    /* Space between label and dropdown */
+    margin-bottom: 10px;
+  }
+
+  span {
+    color: #06402B;
+  }
+
+  strong {
+    color: #caae0c;
+    font-size: 40px;
+  }
+
+  .calculate-btn {
+    width: 100%;
+    padding: 10px;
+    background: #06402B;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid grey;
+    cursor: pointer;
+    font-size: large;
+  }
+
+  .head {
+    background: #06402B;
+  }
+
+  .l-t {
+    border: none;                 /* Remove default border */
+    border-bottom: 1px solid #000; /* Add a bottom border to resemble a line */
+    background-color: transparent; /* Transparent background */
+    font-size: 20px;              /* Adjust font size */
+    color: #000;                  /* Text color */
+    outline: none;   
+  }
+
+  .l-t:focus {
+    border-bottom-color: #06402B; 
+  }
+
+  .line-date {
+    font-family: 'Poppins', sans-serif;
+    border: none;           /* Remove the default border */
+    border-bottom: 1px solid #000; /* Add a bottom border to resemble a line */
+    background-color: transparent; /* Make the background transparent */
+    font-size: 20px;        /* Adjust the font size */
+    color: #000;            /* Text color */
+    width: 175px; 
+    outline: none;     
+  }
+
+  .line-date:focus {
+    border-bottom-color: #06402B; /* Change color when focused */
+  }
+
+  #l-amnt {
+    border: none;                 /* Remove default border */
+    border-bottom: 1px solid #000; /* Add a bottom border to resemble a line */
+    background-color: transparent; /* Transparent background */
+    font-size: 19px;              /* Adjust font size */
+    color: #000;                  /* Text color */
+    outline: none;    
+    width: 175px;   
+  }
+
+  #l-amnt:focus {
+    border-bottom-color: #06402B; /* Change color when focused */
+  }
+
+  #n-net {
+    border: none;                 /* Remove default border */
+    border-bottom: 1px solid #000; /* Add a bottom border to resemble a line */
+    background-color: transparent; /* Transparent background */
+    font-size: 19px;              /* Adjust font size */
+    color: #000;                  /* Text color */
+    outline: none;    
+    width: 175px;  
+  }
+
+  #n-net:focus {
+    border-bottom-color: #06402B; /* Change color when focused */
+  }
+
+  #debt {
+    border: none;                 /* Remove default border */
+    border-bottom: 1px solid #000; /* Add a bottom border to resemble a line */
+    background-color: transparent; /* Transparent background */
+    font-size: 19px;              /* Adjust font size */
+    color: #000;                  /* Text color */
+    outline: none;    
+    width: 175px; 
+  }
+
+  #debt:focus {
+    border-bottom-color: #06402B; /* Change color when focused */
+  }
+
+  .dynamicLabel {
+    visibility: hidden;
+  }
+    table {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 14px;
+        width: 100%;
+        border-collapse: collapse; /* Merge borders */
+        background: #fff;
+        margin-top: 11px;
+        border: 1px solid #ddd; /* Add a border around the table */
+    }
+
+    th, td {
+        text-align: left;
+        border-bottom: 1px solid #ddd; /* Add bottom border to table cells */
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+        border-top: 1px solid #ddd; /* Add top border to header cells */
+    }
+
+    tr:hover {
+        background-color: #f1f1f1; /* Highlight row on hover */
+    }
+
+    /* Add border to each cell */
+    td {
+        border: 1px solid #ddd; /* Add border to the left and right of table cells */
+    }
+
+    tr:last-child td {
+        border-bottom: none; /* Remove bottom border for the last row */
+    }
+
+    .num {
+      text-align: center;
+    }
+
+    .amnt {
+      text-align: right;
+      color: rgb(92, 89, 89);
+    }
+
+    .paymnt {
+      font-family: 'Poppins', sans-serif;
+      border: 1px solid #06402B;
+      font-size: 18px;
+      width: 99.5%;
+      margin-top: 8px;
+      border-radius: 5px;
+      margin-bottom: 11px;
+      padding: 3px;
+      text-align: center;
+    }
+
+    .err-mess {
+      border: 1px solid #c41b0e;
+      background: #f1483c;
+      width: 99.5%;
+      margin-top: 11px;
+      border-radius: 5px;
+      padding: 3px;
+      margin-bottom: 11px;
+      display: none;
+      color: white;
+    }
+
+    #create-date {
+      color: #06402B;
+    }
+
+    .desc {
+        font-weight: bold;
+    }
+
+    .l-int {
+        display: none;
+    }
+
+    .v-1 {
+        border: 1px solid grey;
+        padding: 5px;
+        padding-top: 11px;
+        margin-bottom: 11px;
+        border-radius: 5px;
+        background: #FAFAFA;
+    }
+
+    .dropdown-group {
+        width: 400px; /* Adjust this value as needed */
+    }
+
+    /* Adjust width of the select element */
+    .dropdown-group select {
+        width: 33%; /* Full width of the parent container */
+    }
+
+    .i-ivu-bx-container {
+            display: flex;
+            gap: 5px; /* Optional spacing between divs */
+        }
+
+        .i-ivu-box {
+            flex: 1; /* Optional: make divs the same size */
+            padding: 10px;
+        }
+
+        .i-ivu-box1 {
+            flex: 1; /* Optional: make divs the same size */
+            padding: 1px;
+            margin-top: 2px;
+        }
+
+        .i-ivu-box2 {
+            flex: 1; /* Optional: make divs the same size */
+            background-color: #06402B;
+            padding: 1px;
+            margin-top: 2px;
+            border-radius: 5px;
+        }
+
+        .i-ivu-input-group {
+            display: flex; /* Use flexbox for alignment */
+            justify-content: flex-end; /* Push the label to the right */
+            gap: 10px;
+            margin-bottom: 13px;
+        }
+
+        .i-ivu-input-group1 {
+            display: flex; /* Use flexbox for alignment */
+            color: white;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        label {
+            font-size: 16px;
+        }
+
+        .i-ivu-res {
+            color: white;
+        }
+
+        .peso {
+            color: #06402B;
+        }
+
+        .peso1 {
+            color: white;
+        }
+
+        .i-ivu-strng {
+            font-weight: bold;
+        }
+
+        .i-default {
+            margin-top: 15px;
+        }
+
+        /* Footer Styling */
+    .footer {
+        background-color: #524f4f;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin-top: 20px;
+    }
+
+    .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .footer-section {
+        flex: 1 1 calc(33.333% - 20px); /* Responsive columns */
+        margin: 10px;
+        min-width: 200px;
+    }
+
+    .footer-section h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .footer-section p,
+    .footer-section ul {
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+
+    .footer-section ul {
+        list-style: none;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 5px;
+    }
+
+    .footer-section ul li a {
+        color: #ddd;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+        color: #fff;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding: 10px 0;
+        border-top: 1px solid #444;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .crt-dt {
+        margin-top: 11px;
+    }
+</style>
+
+<script>
+ document.getElementById("calculate").addEventListener("click", function() {
+     const inputDate = document.getElementById("input-date").value;
+     const loanTerm = parseInt(document.getElementById("l-t").value, 10);
+     const netIncome = parseInt(document.getElementById("n-net").value, 10);
+     const loanAmount = parseInt(document.getElementById("l-amnt").value, 10);
+     const resultDiv = document.getElementById("result");
+     const resDiv = document.getElementById("res");
+     const lrfLabel = document.getElementById("dynamicLabel");
+     const monsLabel = document.getElementById("dynamicLabel1");
+     const loanInterest = document.getElementById("loan-int");
+     const loanLrf = document.getElementById("loan-lrf");
+     const weeklyPay = document.getElementById("weekly-pay");
+     const errMess = document.getElementById("err");
+     const err = document.getElementById("err-mess");
+
+     // Validate and parse the input date
+     if (!inputDate || isNaN(loanTerm) || isNaN(loanAmount)) {
+         errMess.textContent = "Please fill out all fields with valid values.";
+         err.style.display = "block";
+         return;
+     } else {
+         err.style.display = "none";
+     }
+
+     const startDate = new Date(inputDate); // inputDate is in YYYY-MM-DD format
+
+     // Calculate the next week's start date
+     const startDatePlusWeek = new Date(startDate);
+     startDatePlusWeek.setDate(startDatePlusWeek.getDate() + 7); // Start from next week
+
+     
+     // Calculate the end date by adding the loan term weeks (in days)
+     const endDate = new Date(startDatePlusWeek);
+     endDate.setDate(endDate.getDate() + ((loanTerm - 1) * 7)); // Add loan term weeks
+
+     // Calculate total loan amount including interest
+    //  const totalLoan = loanAmount * loanInt; // total = loan amount + interest
+
+    //  const totalWeeklyDue = ((loanAmount * loanInt) + loanAmount) / loanTerm;
+
+     const lrfLabelValue = parseFloat(lrfLabel.textContent, 10);
+
+     const multipliedResult = lrfLabelValue * loanAmount;
+
+     const fiftyCent = netIncome * 0.50;
+
+     const monsLabelValue = parseFloat(monsLabel.textContent, 10);
+     const mons = fiftyCent * monsLabelValue;
+
+     const amntDuplicate = document.getElementById("l-amnt").value;
+
+     const selectedDate = document.getElementById("input-date").value;
+
+     if (selectedDate) {
+         const date = new Date(selectedDate);
+         // Array of month names
+        const monthNames = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+
+        const formattedDate =
+            String(date.getDate()).padStart(2, '0')+// Day
+            monthNames[date.getMonth()]+            // Month name
+            date.getFullYear();      
+
+         document.getElementById("create-date").textContent = `${formattedDate}`;
+     } else {
+         document.getElementById("create-date").textContent = "Please select a date.";
+     }
+
+     // Display the loan amount inside the result div
+     document.getElementById("loan-dup").textContent = new Intl.NumberFormat().format(amntDuplicate);
+
+     document.getElementById("loan-dup1").textContent = new Intl.NumberFormat().format(amntDuplicate);
+
+     document.getElementById("l-amnt-total").textContent = new Intl.NumberFormat().format(amntDuplicate);
+
+     document.getElementById("l-amnt-total1").textContent = new Intl.NumberFormat().format(amntDuplicate);
+
+     const netDuplicate = document.getElementById("n-net").value;
+
+     document.getElementById("net-dup").textContent = new Intl.NumberFormat().format(netDuplicate);
+
+     const mTotal = document.getElementById("m-50");
+
+     mTotal.textContent = new Intl.NumberFormat('en-US', {
+         minimumFractionDigits: 2,
+         maximumFractionDigits: 2
+     }).format(netDuplicate * .50);
+setTimeout(function() {
+     // Assuming mTerm contains a numeric value
+     const mTerm = parseInt(document.getElementById("m-loan-term").textContent, 10);
+     const loanTotal = document.getElementById("loan-total");
+
+     // Parse mTotal.textContent to a number, removing commas
+     const mTotalValue = parseFloat(mTotal.textContent.replace(/,/g, ''));
+
+     // Calculate loanTotal and format it
+     loanTotal.textContent = new Intl.NumberFormat('en-US', {
+         minimumFractionDigits: 2,
+         maximumFractionDigits: 2
+     }).format(mTerm * mTotalValue);
+
+     const loanable = parseFloat(document.getElementById("loan-total").textContent.replace(/,/g, ''));
+
+    document.getElementById("loanable").textContent = new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(loanable);
+
+    const existLoan = parseFloat(document.getElementById("exist-loan").textContent.replace(/,/g, ''));
+
+    const totalLoanable = loanable - existLoan;
+
+    const resultElement = document.getElementById("a-b=c");
+    resultElement.textContent = new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(totalLoanable);
+
+    if (totalLoanable >= amntDuplicate) {
+        resultElement.style.color = "lightgreen"; // Green if non-negative
+    } else {
+        resultElement.style.color = "red"; // Red if negative
+    }
+}, 300);
+
+     // Display the result in MM/DD/YYYY format
+     const formatDate = (date) => {
+        const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        const dd = String(date.getDate()).padStart(2, '0');
+        const mm = monthNames[date.getMonth()]; // Get the month name
+        const yyyy = date.getFullYear();
+        return `${dd}${mm}${yyyy}`; // Format as DD MMM YYYY
+     };
+
+     // Display results
+     resultDiv.textContent = `${formatDate(startDatePlusWeek)}`;
+     resDiv.textContent = `${formatDate(endDate)}`
+     loanLrf.textContent = new Intl.NumberFormat('en-US', {
+         minimumFractionDigits: 2,
+         maximumFractionDigits: 2
+     }).format(multipliedResult);
+     // resDiv.textContent = `Total Loan interest: ${totalLoan.toFixed(2)}\nWeekly Due: ${totalWeeklyDue}\nLrf: ${multipliedResult}\n50%: ${fiftyCent}\nmons: ${mons}`;
+
+     const loanDept = document.getElementById("debt").value;
+
+     document.getElementById("exist-loan").textContent = new Intl.NumberFormat().format(loanDept);
+
+ });
+</script>
+
+</html>
