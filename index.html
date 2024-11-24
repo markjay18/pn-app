@@ -13,100 +13,114 @@
   <title>CMRI Loan Calculator</title>
 </head>
 
+<style>
+.spc {
+    margin-left: 5px;
+}
+
+.spc1 {
+    margin-left: 9px;
+}
+
+.spc2 {
+    margin-left: 23px;
+}
+
+.spc3 {
+    margin-left: 13px;
+}
+
+.i-ivu-input{
+    display: flex;
+    align-items: center; 
+    text-align: center;
+    align-content: center;
+    margin: 0 auto;
+}
+
+</style>
+
 <body>
   <div class="container">
     <div class="ico"><img src="asset/img/cal-ico.png" class="cal-ico"> </div>
     <h1><strong>PN</strong> CALCULATOR</h1>
-    <div class="i-ivu-bx-container">
-        <div class="i-ivu-box">
-            <div class="i-ivu-input-group">
-                <label for="date">Creation Date: </label>       
-            </div>
-        
-            <div class="i-ivu-input-group">
-                <label for="name">Loan Amount: </label>
-            </div>
-        
-            <div class="i-ivu-input-group">
-                <label for="name">Net Income: </label>
-            </div>
-
-            <div class="i-ivu-input-group">
-                <label for="name">Loan Term: </label>
-            </div>
-
-            <div class="i-ivu-input-group">
-                <label for="name">Pagkakautang: </label>
-            </div>
+    <div class="v-1">
+        <div class="input-group i-ivu-input">
+            <label for="date">Creation Date * : </label>
+            <input type="date" id="input-date" name="date" class="line-date spc" placeholder="MM-DD-YYYY">
         </div>
-        <div class="i-ivu-box">
-            <div class="input-group">
-                <input type="date" id="input-date" name="date" class="line-date" placeholder="MM-DD-YYYY">   
-            </div>
-            <div class="input-group">
-                <input type="text" id="l-amnt" name="l-amnt" class="numberInput">
-            </div>
-            <div class="input-group">
-                <input type="text" id="n-net" name="n-net" class="numberInput n-net">
-            </div>
-            <div class="dropdown-group">
-                <select id="l-t" name="l-t" class="l-t">
-                    <option value=""></option>
-                    <option value="" class="desc">Personal/Housing/Sikap</option>
-                    <option value="4">4</option>
-                    <option value="8">8</option>
-                    <option value="12">12</option>
-                    <option value="16">16</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                    <option value="36">36</option>
-                    <option value="50">50</option>
-                    <option value="" class="desc">Education</option>
-                    <option value="012">12</option>
-                    <option value="025">25</option>
-                    <option value="036">36</option>
-                    <option value="050">50</option>
-                    <option value="">SSS</option>
-                    <option value="0025">25</option>
-                    <option value="" class="desc">Sagip/Kabuklod</option>
-                    <option value="0050">50</option>
-                </select>
-                <span>weeks</span>
-            </div>
-            <div class="input-group">
-                <input type="text" id="debt" name="debt" class="numberInput">
-            </div>
-            <div class="dropdown-group l-int">
-                <label for="options">Loan Interest * </label>
-                <select id="l-int" name="l-int" required>
-                    <option value=""></option>
-                    <option value="">Personal/Housing/Sikap</option>
-                    <option value=".226">2.26 (4w)</option>
-                    <option value=".512">5.12 (8w)</option>
-                    <option value=".768">7.68 (12w)</option>
-                    <option value=".1024">10.24 (16w)</option>
-                    <option value=".128">12.8 (20w)</option>
-                    <option value=".16">16 (25w)</option>
-                    <option value=".2128">21.28 (36w)</option>
-                    <option value=".28">28 (50w)</option>
-                    <option value="">Education</option>
-                    <option value=".28">4.32 (12w)</option>
-                    <option value=".9">9 (25w)</option>
-                    <option value=".1296">12.96 (36w)</option>
-                    <option value=".18">18 (50w)</option>
-                    <option value="">SSS</option>
-                    <option value=".12">12</option>
-                    <option value="">SAgip/Kabuklod</option>
-                    <option value=".24">24</option>
-                </select>
-                <span>%</span>
-            </div>
+    
+        <div class="input-group">
+            <label for="name">Loan Amount * : </label>
+            <input type="text" id="l-amnt" name="l-amnt" class="numberInput spc1">
+        </div>
+    
+        <div class="input-group">
+            <label for="name">Net Income * : </label>
+            <input type="text" id="n-net" name="n-net" class="numberInput n-net spc2">
+        </div>
+    
+        <div class="dropdown-group">
+            <label for="options">Loan Terms * : </label>
+            <select id="l-t" name="l-t" class="l-t spc3">
+                <option value=""></option>
+                <option value="" class="desc">Personal/Housing/Sikap</option>
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="12">12</option>
+                <option value="16">16</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="36">36</option>
+                <option value="50">50</option>
+                <option value="" class="desc">Education</option>
+                <option value="012">12</option>
+                <option value="025">25</option>
+                <option value="036">36</option>
+                <option value="050">50</option>
+                <option value="">SSS</option>
+                <option value="0025">25</option>
+                <option value="" class="desc">Sagip/Kabuklod</option>
+                <option value="0050">50</option>
+            </select>
+            <span>weeks</span>
+        </div>
+    
+        <div class="input-group">
+            <label for="name">Pagkakautang * : </label>
+            <input type="text" id="debt" name="debt" class="numberInput">
+        </div>
+    
+        <div class="dropdown-group l-int">
+            <label for="options">Loan Interest * </label>
+            <select id="l-int" name="l-int" required>
+                <option value=""></option>
+                <option value="">Personal/Housing/Sikap</option>
+                <option value=".226">2.26 (4w)</option>
+                <option value=".512">5.12 (8w)</option>
+                <option value=".768">7.68 (12w)</option>
+                <option value=".1024">10.24 (16w)</option>
+                <option value=".128">12.8 (20w)</option>
+                <option value=".16">16 (25w)</option>
+                <option value=".2128">21.28 (36w)</option>
+                <option value=".28">28 (50w)</option>
+                <option value="">Education</option>
+                <option value=".28">4.32 (12w)</option>
+                <option value=".9">9 (25w)</option>
+                <option value=".1296">12.96 (36w)</option>
+                <option value=".18">18 (50w)</option>
+                <option value="">SSS</option>
+                <option value=".12">12</option>
+                <option value="">SAgip/Kabuklod</option>
+                <option value=".24">24</option>
+            </select>
+            <span>%</span>
+        </div>
+        <div class="err-mess" id="err-mess">
+            <div id="err"></div>
         </div>
     </div>
-  
-    <div class="err-mess" id="err-mess">
-        <div id="err"></div>
-    </div>
+
     <button id="calculate" class="calculate-btn">
        Calculate
     </button>
@@ -937,12 +951,15 @@
     }
 
     .v-1 {
-        border: 1px solid grey;
+        position: relative;
+        text-align: center;
         padding: 5px;
         padding-top: 11px;
-        margin-bottom: 11px;
+        padding-bottom: 11px;
         border-radius: 5px;
         background: #FAFAFA;
+        margin: auto;
+        width: 325px;
     }
 
     .dropdown-group {
