@@ -38,9 +38,15 @@
     margin: 0 auto;
 }
 
+
+
 </style>
 
 <body>
+    <div  class="loading" id="loading"><span class="loader"></span><div>Loading...</div></div>
+
+    <div class="load-container" id="load-container"></div>
+
   <div class="container">
     <div class="ico"><img src="asset/img/cal-ico.png" class="cal-ico"> </div>
     <h1><strong>PN</strong> CALCULATOR</h1>
@@ -251,6 +257,8 @@
                 </div>
             </div>
         </div>
+
+        <button id="add-weeks-btn" class="calculate-btn">+2</button>
         
     </div>
 
@@ -716,7 +724,54 @@
 
   body {
     font-family: 'Poppins', sans-serif;
+    margin: 0;
   }
+
+  .loader {
+            width: 35px;
+            height: 35px;
+            border: 5px solid #FFF;
+            border-bottom-color:#06402B;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            }
+
+            @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        } 
+        #loading {
+            
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Adjust space between loader and text */
+              
+            /* Centering on screen */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            background-color: rgba(184, 174, 174, 0.5);
+            padding: 10px;
+            border-radius: 4px;
+            color: #FFF;
+            z-index: 9999;
+        }
+
+        #load-container {
+            position: fixed;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+        }
 
   .container {
     padding: 20px;
@@ -985,6 +1040,7 @@
         background: #FAFAFA;
         margin: auto;
         width: 335px;
+        z-index: 1000;
     }
 
     .dropdown-group {
@@ -1125,7 +1181,27 @@
 </style>
 
 <script>
+window.onload = () => {
+            const loaderContainer = document.getElementById("load-container");
+            const loading = document.getElementById("loading");
+            loaderContainer.style.display = "none";
+            loading.style.display = "none";
+        };
+</script>
+
+<script>
  document.getElementById("calculate").addEventListener("click", function() {
+    
+    const loaderContainer = document.getElementById("load-container");
+            const loading = document.getElementById("loading");
+            loaderContainer.style.display = "block";
+            loading.style.display = "flex";
+    
+        setTimeout(() => {
+            loaderContainer.style.display = "none";
+            loading.style.display = "none";
+        }, 900);
+
      const inputDate = document.getElementById("input-date").value;
      const loanTerm = parseInt(document.getElementById("l-t").value, 10);
      const netIncome = parseInt(document.getElementById("n-net").value, 10);
@@ -1142,7 +1218,7 @@
 
      // Validate and parse the input date
      if (!inputDate || isNaN(loanTerm) || isNaN(loanAmount)) {
-         errMess.textContent = "Please fill out all fields with valid values.";
+         errMess.textContent = "Please fill out fields with valid values.";
          err.style.display = "block";
          return;
      } else {
@@ -1279,6 +1355,7 @@ setTimeout(function() {
      document.getElementById("exist-loan").textContent = new Intl.NumberFormat().format(loanDept);
 
  });
+
 </script>
 
 </html>
