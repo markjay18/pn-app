@@ -320,7 +320,7 @@
                 // Check if the user IP is in the allowed list
                 if (!allowedIPs.includes(userIP)) {
 
-                    window.location.href = "http://localhost/mj/err.html";
+                    window.location.href = "https://markjay18.github.io/pn-app/err.html";
 
                 }
             } catch (error) {
@@ -331,7 +331,7 @@
 
         // Only check access on the main page
             document.addEventListener("DOMContentLoaded", () => {
-                if (window.location.pathname === "http://localhost/mj/") { // Adjust this to your main page path
+                if (window.location.pathname === "https://markjay18.github.io/pn-app/") { // Adjust this to your main page path
                     checkAccess();
                 }
             });
