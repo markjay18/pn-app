@@ -374,9 +374,9 @@
               cr.textContent = 4.25;
               er.textContent = 4.49;
 
-              totalLoan = lAmount * 0.256;
+              totalLoan = lAmount * 0.0256;
 
-              totalWeeklyDue = ((lAmount * 0.256) + lAmount) / 4;
+              totalWeeklyDue = ((lAmount * 0.0256) + lAmount) / 4;
 
               totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
 
@@ -399,9 +399,9 @@
               cr.textContent = 4.68;
               er.textContent = 4.96;
 
-              totalLoan = lAmount * 0.512;
+              totalLoan = lAmount * 0.0512;
 
-              totalWeeklyDue = ((lAmount * 0.512) + lAmount) / 8;
+              totalWeeklyDue = ((lAmount * 0.0512) + lAmount) / 8;
 
               totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
 
@@ -423,9 +423,9 @@
               cr.textContent = 4.8;
               er.textContent = 5.11;
 
-              totalLoan = lAmount * 0.768;
+              totalLoan = lAmount * 0.0768;
 
-              totalWeeklyDue = ((lAmount * 0.768) + lAmount) / 12;
+              totalWeeklyDue = ((lAmount * 0.0768) + lAmount) / 12;
 
               totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
 
@@ -567,9 +567,9 @@
               cr.textContent = 2.74;
               er.textContent = 2.88;
 
-              totalLoan = lAmount * 0.432;
+              totalLoan = lAmount * 0.0432;
 
-              totalWeeklyDue = ((lAmount * 0.432) + lAmount) / 12;
+              totalWeeklyDue = ((lAmount * 0.0432) + lAmount) / 12;
 
               totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
 
@@ -591,9 +591,9 @@
               cr.textContent = 2.81;
               er.textContent = 2.95;
 
-              totalLoan = lAmount * 0.9;
+              totalLoan = lAmount * 0.09;
 
-              totalWeeklyDue = ((lAmount * 0.9) + lAmount) / 25;
+              totalWeeklyDue = ((lAmount * 0.09) + lAmount) / 25;
 
               totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
 
@@ -1234,7 +1234,7 @@ window.onload = () => {
      const endDate = new Date(startDatePlusWeek);
      endDate.setDate(endDate.getDate() + ((loanTerm - 1) * 7)); // Add loan term weeks
 
-   // Check for Dec 25 and Jan 1 within the date range
+     // Check for Dec 25 and Jan 1 within the date range
         const checkHolidayInRange = (date1, date2, holiday) => {
             return holiday >= date1 && holiday <= date2;
         };
