@@ -1234,6 +1234,19 @@ window.onload = () => {
      const endDate = new Date(startDatePlusWeek);
      endDate.setDate(endDate.getDate() + ((loanTerm - 1) * 7)); // Add loan term weeks
 
+   // Check for Dec 25 and Jan 1 within the date range
+        const checkHolidayInRange = (date1, date2, holiday) => {
+            return holiday >= date1 && holiday <= date2;
+        };
+
+        // Dates for holidays
+        const christmas = new Date(startDatePlusWeek.getFullYear(), 11, 25); // December 25
+        const newYear = new Date(endDate.getFullYear(), 0, 1); // January 1
+
+        if (checkHolidayInRange(startDatePlusWeek, endDate, christmas) || checkHolidayInRange(startDatePlusWeek, endDate, newYear)) {
+            endDate.setDate(endDate.getDate() + 14); // Add 14 days (2 weeks)
+        }
+
      // Calculate total loan amount including interest
     //  const totalLoan = loanAmount * loanInt; // total = loan amount + interest
 
