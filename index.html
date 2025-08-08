@@ -1215,7 +1215,7 @@ window.onload = () => {
      const err = document.getElementById("err-mess");
 
      // Validate and parse the input date
-     if (!inputDate || isNaN(loanTerm) || isNaN(loanAmount)) {
+     if (isNaN(loanTerm) || isNaN(loanAmount)) {
          errMess.textContent = "Please fill out fields with valid values.";
          err.style.display = "block";
          return;
@@ -1370,3 +1370,4 @@ setTimeout(function() {
 </script>
 
 </html>
+
