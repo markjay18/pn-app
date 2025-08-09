@@ -1283,6 +1283,7 @@ document.getElementById("calculate").addEventListener("click", function() {
         const weeklyPay = document.getElementById("weekly-pay");
         const errMess = document.getElementById("err");
         const err = document.getElementById("err-mess");
+		const paymentCalc = document.querySelector('.paymnt');
 
         // Validate and parse the input date
         if (isNaN(loanTerm) || isNaN(loanAmount)) {
@@ -1292,6 +1293,12 @@ document.getElementById("calculate").addEventListener("click", function() {
         } else {
             err.style.display = "none";
         }
+
+		if (!inputDate) {
+		    paymentCalc.style.display = 'none';
+		} else {
+		    paymentCalc.style.display = 'block';
+		}
 
         const startDate = new Date(inputDate); // inputDate is in YYYY-MM-DD format
 
@@ -1439,6 +1446,7 @@ document.getElementById("calculate").addEventListener("click", function() {
 </script>
 
 </html>
+
 
 
 
