@@ -1180,61 +1180,61 @@
 
 <script>
 window.onload = () => {
-            const loaderContainer = document.getElementById("load-container");
-            const loading = document.getElementById("loading");
-            loaderContainer.style.display = "none";
-            loading.style.display = "none";
-        };
+    const loaderContainer = document.getElementById("load-container");
+    const loading = document.getElementById("loading");
+    loaderContainer.style.display = "none";
+    loading.style.display = "none";
+};
 </script>
 
 <script>
- document.getElementById("calculate").addEventListener("click", function() {
-    
-    const loaderContainer = document.getElementById("load-container");
-            const loading = document.getElementById("loading");
-            loaderContainer.style.display = "block";
-            loading.style.display = "flex";
-    
+document.getElementById("calculate").addEventListener("click", function() {
+
+        const loaderContainer = document.getElementById("load-container");
+        const loading = document.getElementById("loading");
+        loaderContainer.style.display = "block";
+        loading.style.display = "flex";
+
         setTimeout(() => {
             loaderContainer.style.display = "none";
             loading.style.display = "none";
         }, 900);
 
-     const inputDate = document.getElementById("input-date").value;
-     const loanTerm = parseInt(document.getElementById("l-t").value, 10);
-     const netIncome = parseInt(document.getElementById("n-net").value, 10);
-     const loanAmount = parseInt(document.getElementById("l-amnt").value, 10);
-     const resultDiv = document.getElementById("result");
-     const resDiv = document.getElementById("res");
-     const lrfLabel = document.getElementById("dynamicLabel");
-     const monsLabel = document.getElementById("dynamicLabel1");
-     const loanInterest = document.getElementById("loan-int");
-     const loanLrf = document.getElementById("loan-lrf");
-     const weeklyPay = document.getElementById("weekly-pay");
-     const errMess = document.getElementById("err");
-     const err = document.getElementById("err-mess");
+        const inputDate = document.getElementById("input-date").value;
+        const loanTerm = parseInt(document.getElementById("l-t").value, 10);
+        const netIncome = parseInt(document.getElementById("n-net").value, 10);
+        const loanAmount = parseInt(document.getElementById("l-amnt").value, 10);
+        const resultDiv = document.getElementById("result");
+        const resDiv = document.getElementById("res");
+        const lrfLabel = document.getElementById("dynamicLabel");
+        const monsLabel = document.getElementById("dynamicLabel1");
+        const loanInterest = document.getElementById("loan-int");
+        const loanLrf = document.getElementById("loan-lrf");
+        const weeklyPay = document.getElementById("weekly-pay");
+        const errMess = document.getElementById("err");
+        const err = document.getElementById("err-mess");
 
-     // Validate and parse the input date
-     if (isNaN(loanTerm) || isNaN(loanAmount)) {
-         errMess.textContent = "Please fill out fields like Loan Amount, Loan Terms with valid values.";
-         err.style.display = "block";
-         return;
-     } else {
-         err.style.display = "none";
-     }
+        // Validate and parse the input date
+        if (isNaN(loanTerm) || isNaN(loanAmount)) {
+            errMess.textContent = "Please fill out fields like Loan Amount, Loan Terms with valid values.";
+            err.style.display = "block";
+            return;
+        } else {
+            err.style.display = "none";
+        }
 
-     const startDate = new Date(inputDate); // inputDate is in YYYY-MM-DD format
+        const startDate = new Date(inputDate); // inputDate is in YYYY-MM-DD format
 
-     // Calculate the next week's start date
-     const startDatePlusWeek = new Date(startDate);
-     startDatePlusWeek.setDate(startDatePlusWeek.getDate() + 7); // Start from next week
+        // Calculate the next week's start date
+        const startDatePlusWeek = new Date(startDate);
+        startDatePlusWeek.setDate(startDatePlusWeek.getDate() + 7); // Start from next week
 
-     
-     // Calculate the end date by adding the loan term weeks (in days)
-     const endDate = new Date(startDatePlusWeek);
-     endDate.setDate(endDate.getDate() + ((loanTerm - 1) * 7)); // Add loan term weeks
 
-     // Check for Dec 25 and Jan 1 within the date range
+        // Calculate the end date by adding the loan term weeks (in days)
+        const endDate = new Date(startDatePlusWeek);
+        endDate.setDate(endDate.getDate() + ((loanTerm - 1) * 7)); // Add loan term weeks
+
+        // Check for Dec 25 and Jan 1 within the date range
         const checkHolidayInRange = (date1, date2, holiday) => {
             return holiday >= date1 && holiday <= date2;
         };
@@ -1247,128 +1247,128 @@ window.onload = () => {
             endDate.setDate(endDate.getDate() + 14); // Add 14 days (2 weeks)
         }
 
-     // Calculate total loan amount including interest
-    //  const totalLoan = loanAmount * loanInt; // total = loan amount + interest
+        // Calculate total loan amount including interest
+        //  const totalLoan = loanAmount * loanInt; // total = loan amount + interest
 
-    //  const totalWeeklyDue = ((loanAmount * loanInt) + loanAmount) / loanTerm;
+        //  const totalWeeklyDue = ((loanAmount * loanInt) + loanAmount) / loanTerm;
 
-     const lrfLabelValue = parseFloat(lrfLabel.textContent, 10);
+        const lrfLabelValue = parseFloat(lrfLabel.textContent, 10);
 
-     const multipliedResult = lrfLabelValue * loanAmount;
+        const multipliedResult = lrfLabelValue * loanAmount;
 
-     const fiftyCent = netIncome * 0.50;
+        const fiftyCent = netIncome * 0.50;
 
-     const monsLabelValue = parseFloat(monsLabel.textContent, 10);
-     const mons = fiftyCent * monsLabelValue;
+        const monsLabelValue = parseFloat(monsLabel.textContent, 10);
+        const mons = fiftyCent * monsLabelValue;
 
-     const amntDuplicate = document.getElementById("l-amnt").value;
+        const amntDuplicate = document.getElementById("l-amnt").value;
 
-     const selectedDate = document.getElementById("input-date").value;
+        const selectedDate = document.getElementById("input-date").value;
 
-     if (selectedDate) {
-         const date = new Date(selectedDate);
-         // Array of month names
-        const monthNames = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-        ];
+        if (selectedDate) {
+            const date = new Date(selectedDate);
+            // Array of month names
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
 
-        const formattedDate =
-            String(date.getDate()).padStart(2, '0')+// Day
-            monthNames[date.getMonth()]+            // Month name
-            date.getFullYear();      
+            const formattedDate =
+                String(date.getDate()).padStart(2, '0') + // Day
+                monthNames[date.getMonth()] + // Month name
+                date.getFullYear();
 
-         document.getElementById("create-date").textContent = `${formattedDate}`;
-     } else {
-         document.getElementById("create-date").textContent = "Please select a date.";
-     }
+            document.getElementById("create-date").textContent = `${formattedDate}`;
+        } else {
+            document.getElementById("create-date").textContent = "Please select a date.";
+        }
 
-     // Display the loan amount inside the result div
-     document.getElementById("loan-dup").textContent = new Intl.NumberFormat().format(amntDuplicate);
+        // Display the loan amount inside the result div
+        document.getElementById("loan-dup").textContent = new Intl.NumberFormat().format(amntDuplicate);
 
-     document.getElementById("loan-dup1").textContent = new Intl.NumberFormat().format(amntDuplicate);
+        document.getElementById("loan-dup1").textContent = new Intl.NumberFormat().format(amntDuplicate);
 
-     document.getElementById("l-amnt-total").textContent = new Intl.NumberFormat().format(amntDuplicate);
+        document.getElementById("l-amnt-total").textContent = new Intl.NumberFormat().format(amntDuplicate);
 
-     document.getElementById("l-amnt-total1").textContent = new Intl.NumberFormat().format(amntDuplicate);
+        document.getElementById("l-amnt-total1").textContent = new Intl.NumberFormat().format(amntDuplicate);
 
-     const netDuplicate = document.getElementById("n-net").value;
+        const netDuplicate = document.getElementById("n-net").value;
 
-     document.getElementById("net-dup").textContent = new Intl.NumberFormat().format(netDuplicate);
+        document.getElementById("net-dup").textContent = new Intl.NumberFormat().format(netDuplicate);
 
-     const mTotal = document.getElementById("m-50");
+        const mTotal = document.getElementById("m-50");
 
-     mTotal.textContent = new Intl.NumberFormat('en-US', {
-         minimumFractionDigits: 2,
-         maximumFractionDigits: 2
-     }).format(netDuplicate * .50);
-setTimeout(function() {
-     // Assuming mTerm contains a numeric value
-     const mTerm = parseInt(document.getElementById("m-loan-term").textContent, 10);
-     const loanTotal = document.getElementById("loan-total");
+        mTotal.textContent = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(netDuplicate * .50);
+        setTimeout(function() {
+            // Assuming mTerm contains a numeric value
+            const mTerm = parseInt(document.getElementById("m-loan-term").textContent, 10);
+            const loanTotal = document.getElementById("loan-total");
 
-     // Parse mTotal.textContent to a number, removing commas
-     const mTotalValue = parseFloat(mTotal.textContent.replace(/,/g, ''));
+            // Parse mTotal.textContent to a number, removing commas
+            const mTotalValue = parseFloat(mTotal.textContent.replace(/,/g, ''));
 
-     // Calculate loanTotal and format it
-     loanTotal.textContent = new Intl.NumberFormat('en-US', {
-         minimumFractionDigits: 2,
-         maximumFractionDigits: 2
-     }).format(mTerm * mTotalValue);
+            // Calculate loanTotal and format it
+            loanTotal.textContent = new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(mTerm * mTotalValue);
 
-     const loanable = parseFloat(document.getElementById("loan-total").textContent.replace(/,/g, ''));
+            const loanable = parseFloat(document.getElementById("loan-total").textContent.replace(/,/g, ''));
 
-    document.getElementById("loanable").textContent = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }).format(loanable);
+            document.getElementById("loanable").textContent = new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(loanable);
 
-    const existLoan = parseFloat(document.getElementById("exist-loan").textContent.replace(/,/g, ''));
+            const existLoan = parseFloat(document.getElementById("exist-loan").textContent.replace(/,/g, ''));
 
-    const totalLoanable = loanable - existLoan;
+            const totalLoanable = loanable - existLoan;
 
-    const resultElement = document.getElementById("a-b=c");
-    resultElement.textContent = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }).format(totalLoanable);
+            const resultElement = document.getElementById("a-b=c");
+            resultElement.textContent = new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(totalLoanable);
 
-    if (totalLoanable >= amntDuplicate) {
-        resultElement.style.color = "lightgreen"; // Green if non-negative
-    } else {
-        resultElement.style.color = "red"; // Red if negative
-    }
-}, 300);
+            if (totalLoanable >= amntDuplicate) {
+                resultElement.style.color = "lightgreen"; // Green if non-negative
+            } else {
+                resultElement.style.color = "red"; // Red if negative
+            }
+        }, 300);
 
-     // Display the result in MM/DD/YYYY format
-     const formatDate = (date) => {
-        const monthNames = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-        ];
-        const dd = String(date.getDate()).padStart(2, '0');
-        const mm = monthNames[date.getMonth()]; // Get the month name
-        const yyyy = date.getFullYear();
-        return `${dd}${mm}${yyyy}`; // Format as DD MMM YYYY
-     };
+        // Display the result in MM/DD/YYYY format
+        const formatDate = (date) => {
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+            const dd = String(date.getDate()).padStart(2, '0');
+            const mm = monthNames[date.getMonth()]; // Get the month name
+            const yyyy = date.getFullYear();
+            return `${dd}${mm}${yyyy}`; // Format as DD MMM YYYY
+        };
 
-     // Display results
-     resultDiv.textContent = `${formatDate(startDatePlusWeek)}`;
-     resDiv.textContent = `${formatDate(endDate)}`
-     loanLrf.textContent = new Intl.NumberFormat('en-US', {
-         minimumFractionDigits: 2,
-         maximumFractionDigits: 2
-     }).format(multipliedResult);
-     // resDiv.textContent = `Total Loan interest: ${totalLoan.toFixed(2)}\nWeekly Due: ${totalWeeklyDue}\nLrf: ${multipliedResult}\n50%: ${fiftyCent}\nmons: ${mons}`;
+        // Display results
+        resultDiv.textContent = `${formatDate(startDatePlusWeek)}`;
+        resDiv.textContent = `${formatDate(endDate)}`
+        loanLrf.textContent = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(multipliedResult);
+        // resDiv.textContent = `Total Loan interest: ${totalLoan.toFixed(2)}\nWeekly Due: ${totalWeeklyDue}\nLrf: ${multipliedResult}\n50%: ${fiftyCent}\nmons: ${mons}`;
 
-     const loanDept = document.getElementById("debt").value;
+        const loanDept = document.getElementById("debt").value;
 
-     document.getElementById("exist-loan").textContent = new Intl.NumberFormat().format(loanDept);
+        document.getElementById("exist-loan").textContent = new Intl.NumberFormat().format(loanDept);
 
- });
-
+});
 </script>
 
 </html>
+
 
 
