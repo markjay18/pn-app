@@ -258,7 +258,7 @@
         
     </div>
 
-    <div class="i-ivu-bx-container">
+    <div class="i-ivu-bx-container ea">
         <div class="i-ivu-box2">
             <div class="i-ivu-input-group1">
                 <label for="date">EVALUATION</label>   
@@ -1284,6 +1284,8 @@ document.getElementById("calculate").addEventListener("click", function() {
         const errMess = document.getElementById("err");
         const err = document.getElementById("err-mess");
 		const paymentCalc = document.querySelector('.paymnt');
+		const evalAss = document.querySelector('.ea');
+		const display = inputDate ? 'block' : 'none';
 
         // Validate and parse the input date
         if (isNaN(loanTerm) || isNaN(loanAmount)) {
@@ -1294,11 +1296,8 @@ document.getElementById("calculate").addEventListener("click", function() {
             err.style.display = "none";
         }
 
-		if (!inputDate) {
-		    paymentCalc.style.display = 'none';
-		} else {
-		    paymentCalc.style.display = 'block';
-		}
+		paymentCalc.style.display = display;
+		evalAss.style.display = display;
 
         const startDate = new Date(inputDate); // inputDate is in YYYY-MM-DD format
 
@@ -1446,6 +1445,7 @@ document.getElementById("calculate").addEventListener("click", function() {
 </script>
 
 </html>
+
 
 
 
