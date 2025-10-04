@@ -608,7 +608,7 @@
              }).format(totalLoan);
 
           } else if (value === "036") {
-              lrfDiv.textContent = (lAmount * 0.0103).toFixed(2);
+              lrfDiv.textContent = (lAmount * 0.0108).toFixed(2);
               monsDiv.textContent = 9;
               loanTerm.textContent = 36;
               loanTerm1.textContent = 9;
@@ -662,7 +662,7 @@
               loanTerm1.textContent = 6;
               mLoanTerm.textContent = 6;
               cr.textContent = 3.75;
-              er.textContent = 3.93;
+              er.textContent = 1.05;
 
               totalLoan = lAmount * 0.12;
 
@@ -1471,6 +1471,7 @@ document.getElementById("calculate").addEventListener("click", function() {
 </script>
 
 </html>
+
 
 
 
