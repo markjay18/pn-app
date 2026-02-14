@@ -11,7 +11,8 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <title>CMRI Loan Calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <title>MJ Loan Calculator</title>
 </head>
 
 <style>
@@ -94,7 +95,7 @@
         </div>
     
         <div class="input-group">
-            <label for="name">Pagkakautang * : </label>
+            <label for="name">Previous loan * : </label>
             <input type="text" id="debt" name="debt" class="numberInput">
         </div>
     
@@ -125,9 +126,15 @@
             </select>
             <span>%</span>
         </div>
-        <div class="err-mess" id="err-mess">
-            <div id="err"></div>
+        <div id="err-mess">
+            <div class="alert alert-danger d-flex align-items-center" role="alert" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                </svg>
+                <div id="err"></div>
+            </div>
         </div>
+       
     </div>
 
     <button id="calculate" class="calculate-btn">
@@ -136,6 +143,7 @@
 
     <hr>
 
+    <div class="ivu-hide">
     <div class="i-ivu-bx-container">
         <div class="i-ivu-box1">
             <div class="i-ivu-input-group">
@@ -263,7 +271,7 @@
         
     </div>
 
-    <div class="i-ivu-bx-container">
+    <div class="i-ivu-bx-container eval-assess">
         <div class="i-ivu-box2">
             <div class="i-ivu-input-group1">
                 <label for="date">EVALUATION</label>   
@@ -285,6 +293,7 @@
                 <div class="i-ivu-res"><span class="peso1 i-ivu-strng">₱</span> <span id="l-amnt-total1" class="peso1"></span></div>  
             </div>
         </div>
+    </div>
     </div>
 
     <div id="dynamicLabel" class="dynamicLabel"></div>
@@ -1107,25 +1116,13 @@ tr:last-child td {
 	text-align: center;
 }
 
-.err-mess {
-	border: 1px solid #c41b0e;
-	background: #f1483c;
-	width: 99.5%;
-	margin-top: 11px;
-	border-radius: 5px;
-	padding: 3px;
-	margin-bottom: 11px;
-	display: none;
-	color: white;
-}
-
 #create-date {
 	color: #06402B;
 }
 
 .desc {
 	font-weight: bold;
-	color: black;
+    color: black;
 }
 
 .l-int {
@@ -1311,6 +1308,11 @@ window.onload = () => {
     const loading = document.getElementById("loading");
     loaderContainer.style.display = "none";
     loading.style.display = "none";
+
+    const hideResult = document.querySelector(".ivu-hide");
+    const errMess = document.getElementById("err-mess");
+    hideResult.style.display = "none";
+    errMess.style.display = "none";
 };
 </script>
 
@@ -1342,15 +1344,18 @@ document.getElementById("calculate").addEventListener("click", function() {
         const err = document.getElementById("err-mess");
 		const paymentCalc = document.querySelector('.paymnt');
 		const display = inputDate ? 'block' : 'none';
+        const hideResult = document.querySelector(".ivu-hide");
 
         // Validate and parse the input date
         if (isNaN(loanTerm) || isNaN(loanAmount)) {
-            errMess.textContent = "Please fill out fields like Loan Amount, Loan Terms with valid values.";
+            errMess.textContent = "Please enter valid Loan Amount and Loan Term.";
             err.style.display = "block";
+            hideResult.style.display = "none";
             return;
-        } else {
-            err.style.display = "none";
         }
+
+        err.style.display = "none";
+        hideResult.style.display = "block";
 
 		paymentCalc.style.display = display;
 
@@ -1500,7 +1505,6 @@ document.getElementById("calculate").addEventListener("click", function() {
 </script>
 
 </html>
-
 
 
 
