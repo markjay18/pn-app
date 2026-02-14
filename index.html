@@ -69,7 +69,7 @@
             <label for="options">Loan Terms * : </label>
             <select id="l-t" name="l-t" class="l-t spc3">
                 <option value=""></option>
-                <option value="" class="desc">Personal/Housing/Sikap</option>
+                <option value="" class="desc" disabled>Personal/Housing/Sikap</option>
                 <option value="4">4</option>
                 <option value="8">8</option>
                 <option value="12">12</option>
@@ -78,14 +78,16 @@
                 <option value="25">25</option>
                 <option value="36">36</option>
                 <option value="50">50</option>
-                <option value="" class="desc">Education</option>
+                <option value="" class="desc" disabled>Education</option>
                 <option value="012">12</option>
                 <option value="025">25</option>
                 <option value="036">36</option>
                 <option value="050">50</option>
-                <option value="">SSS</option>
+                <option value="" class="desc" disabled>Zedres</option>
+                <option value="00025">25</option>
+                <option value="" class="desc" disabled>SSS</option>
                 <option value="0025">25</option>
-                <option value="" class="desc">Sagip/Kabuklod</option>
+                <option value="" class="desc" disabled>Sagip/Kabuklod</option>
                 <option value="0050">50</option>
             </select>
             <span>weeks</span>
@@ -101,7 +103,7 @@
             <select id="l-int" name="l-int" required>
                 <option value=""></option>
                 <option value="">Personal/Housing/Sikap</option>
-                <option value=".226">2.26 (4w)</option>
+                <option value=".256">2.56 (4w)</option>
                 <option value=".512">5.12 (8w)</option>
                 <option value=".768">7.68 (12w)</option>
                 <option value=".1024">10.24 (16w)</option>
@@ -110,10 +112,12 @@
                 <option value=".2128">21.28 (36w)</option>
                 <option value=".28">28 (50w)</option>
                 <option value="">Education</option>
-                <option value=".28">4.32 (12w)</option>
+                <option value=".432">4.32 (12w)</option>
                 <option value=".9">9 (25w)</option>
                 <option value=".1296">12.96 (36w)</option>
                 <option value=".18">18 (50w)</option>
+                <option value="">Zedres</option>
+                <option value=".315">3.15 (12w)</option>
                 <option value="">SSS</option>
                 <option value=".12">12</option>
                 <option value="">SAgip/Kabuklod</option>
@@ -654,30 +658,54 @@
                  minimumFractionDigits: 2,
                  maximumFractionDigits: 2
              }).format(totalLoan);
+             //Zedres
+            } else if (value === "00025") {
+                lrfDiv.textContent = (lAmount * 0.0075).toFixed(2);
+                monsDiv.textContent = 6;
+                loanTerm.textContent = 25;
+                loanTerm1.textContent = 6;
+                mLoanTerm.textContent = 6;
+                cr.textContent = 1;
+                er.textContent = 1.05;
+    
+                totalLoan = lAmount * 0.315;
+    
+                totalWeeklyDue = ((lAmount * 0.315) + lAmount) / 25;
+    
+                totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+
+                wPay.textContent = new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(totalWeeklyDue);
+                lInt.textContent = new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(totalLoan);
              //SSS
-          } else if (value === "0025") {
-              lrfDiv.textContent = (lAmount * 0.0075).toFixed(2);
-              monsDiv.textContent = 6;
-              loanTerm.textContent = 25;
-              loanTerm1.textContent = 6;
-              mLoanTerm.textContent = 6;
-              cr.textContent = 3.75;
-              er.textContent = 1.05;
+            } else if (value === "0025") {
+                lrfDiv.textContent = (lAmount * 0.0075).toFixed(2);
+                monsDiv.textContent = 6;
+                loanTerm.textContent = 25;
+                loanTerm1.textContent = 6;
+                mLoanTerm.textContent = 6;
+                cr.textContent = 3.75;
+                er.textContent = 1.05;
 
-              totalLoan = lAmount * 0.12;
+                totalLoan = lAmount * 0.12;
 
-              totalWeeklyDue = ((lAmount * 0.12) + lAmount) / 25;
+                totalWeeklyDue = ((lAmount * 0.12) + lAmount) / 25;
 
-              totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
+                totalWeeklyDue = Math.ceil(totalWeeklyDue / 5) * 5;
 
-             wPay.textContent = new Intl.NumberFormat('en-US', {
-                 minimumFractionDigits: 2,
-                 maximumFractionDigits: 2
-             }).format(totalWeeklyDue);
-             lInt.textContent = new Intl.NumberFormat('en-US', {
-                 minimumFractionDigits: 2,
-                 maximumFractionDigits: 2
-             }).format(totalLoan);
+                wPay.textContent = new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(totalWeeklyDue);
+                lInt.textContent = new Intl.NumberFormat('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(totalLoan);
              //Sagip, kabuklod, OL-Health
           } else if (value === "0050") {
               lrfDiv.textContent = (lAmount * 0.015).toFixed(2);
@@ -1471,7 +1499,6 @@ document.getElementById("calculate").addEventListener("click", function() {
 </script>
 
 </html>
-
 
 
 
